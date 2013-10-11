@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>PathObject example</title>
+	<script type="text/javascript">
+ 		window.addEventListener("load", function(){
+ 			var canvas = document.getElementById("canvas");
+	 		if(canvas && canvas.getContext){
+	 			var context = canvas.getContext("2d");
+	 			if (context) {
+	 				console.log(context);
+	 				var g = context.createLinearGradient(20, 20, 200, 200);
+	 				g.addColorStop(0, "#ff0");
+	 				g.addColorStop(0.5, "#f00");
+	 				context.fillStyle = g;
+	 				context.fillRect(20, 20, 200, 200);
+
+	 				g = context.createRadialGradient(120, 300, 0, 120, 300, 100);
+	 				context.fillStyle = g;
+	 				g.addColorStop(0, "#00f");
+	 				g.addColorStop(1, "#fff");
+	 				context.fillRect(20, 200, 200, 200);
+	 			}
+	 		}
+ 		});
+ 	</script>
+</head>
+<body>
+	<canvas id="canvas" width="1000" height="1000"></canvas>
+</body>
+</html>
