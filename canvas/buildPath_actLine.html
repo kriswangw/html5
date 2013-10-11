@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>2dContextObject example</title>
+	<script type="text/javascript">
+ 		window.addEventListener("load", function(){
+ 			var canvas = document.getElementById("canvas");
+	 		if(canvas && canvas.getContext){
+	 			var context = canvas.getContext("2d");
+	 			if (context) {
+	 				//arcTo line
+	 				var bx = 200, by = 200;
+	 				var radius = 50;
+	 				var c1x = 250, c1y = 250, c2x = 350, c2y = 50, ex = 500, ey = 200;
+	 				context.strokeStyle = "#00f";
+	 				context.beginPath();
+	 				context.moveTo(bx, by);
+	 				context.arcTo(c1x, c1y, c2x, c2y, radius);
+	 				context.lineTo(ex, ey);
+	 				context.moveTo(bx, by);
+	 				context.closePath();
+	 				context.stroke();
+
+	 				context.strokeStyle = "#000";
+	 				context.lineWidth = 1;
+	 				context.beginPath();
+	 				context.moveTo(bx, by);
+	 				context.lineTo(c1x, c1y);
+	 				context.lineTo(c2x, c2y);
+	 				context.lineTo(ex, ey);
+	 				context.moveTo(bx, by);
+	 				context.closePath();
+	 				context.stroke();
+
+	 				context.strokeStyle = "#f00";
+	 				context.lineWidth = 1;
+	 				context.beginPath();
+	 				context.moveTo(10,10);		//在左上方开始
+					context.lineTo(90,10);		//到达圆角开始点的水平线
+					context.arcTo(100,10,100,20,10);	//圆角
+					context.lineTo(100,100);		//到达右下方的垂直线
+					context.stroke();
+
+
+	 			}
+	 		}
+ 		});
+ 	</script>
+</head>
+<body>
+	<canvas id="canvas" width="1000" height="1000"></canvas>
+</body>
+</html>
