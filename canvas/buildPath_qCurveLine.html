@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>2dContextObject example</title>
+	<script type="text/javascript">
+ 		window.addEventListener("load", function(){
+ 			var canvas = document.getElementById("canvas");
+	 		if(canvas && canvas.getContext){
+	 			var context = canvas.getContext("2d");
+	 			if (context) {
+	 				//quadratic line
+	 				context.strokeStyle = "#f00";
+	 				context.lineWidth = 3;
+	 				context.beginPath();
+	 				context.moveTo(10, 10);
+	 				context.quadraticCurveTo(10, 100, 100, 100);
+	 				context.moveTo(10, 10);
+	 				context.closePath();
+	 				context.stroke();
+
+	 				//bezier line
+	 				var c1x = 100, c1y = 400, c2x = 370, c2y = 50, ex = 500, ey = 500;
+	 				context.strokeStyle = "#00f";
+	 				context.beginPath();
+	 				context.moveTo(10, 50);
+	 				context.bezierCurveTo(c1x, c1y, c2x, c2y, ex, ey);
+	 				context.moveTo(10, 50);
+	 				context.closePath();
+	 				context.stroke();
+
+	 				context.strokeStyle = "#000";
+	 				context.lineWidth = 1;
+	 				context.beginPath();
+	 				context.moveTo(10, 50);
+	 				context.lineTo(c1x, c1y);
+	 				context.lineTo(c2x, c2y);
+	 				context.lineTo(ex, ey);
+	 				context.moveTo(10, 50);
+	 				context.closePath();
+	 				context.stroke();
+
+	 			}
+	 		}
+ 		});
+ 	</script>
+</head>
+<body>
+	<canvas id="canvas" width="1000" height="1000"></canvas>
+</body>
+</html>
