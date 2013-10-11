@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>PathObject example</title>
+	<script type="text/javascript">
+ 		window.addEventListener("load", function(){
+ 			var canvas = document.getElementById("canvas");
+	 		if(canvas && canvas.getContext){
+	 			var context = canvas.getContext("2d");
+	 			if (context) {
+	 				console.log(context);
+	 				context.fillStyle = "#00f";
+	 				context.strokeStyle = "#00f";
+	 				context.font = "20px Georgia";
+	 				context.strokeText("hello world!", 20, 20);
+	 				context.fillText("hello world!", 40, 40);
+	 			}
+	 		}
+ 		});
+ 	</script>
+</head>
+<body>
+	<canvas id="canvas" width="1000" height="1000"></canvas>
+</body>
+</html>
