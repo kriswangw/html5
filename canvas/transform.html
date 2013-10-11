@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>PathObject example</title>
+	<script type="text/javascript">
+ 		window.addEventListener("load", function(){
+ 			var canvas = document.getElementById("canvas");
+	 		if(canvas && canvas.getContext){
+	 			var context = canvas.getContext("2d");
+	 			if (context) {
+	 				// //draw a circle
+	 				// context.fillStyle = "#000";
+	 				// context.fillRect(800, 800, 200, 200);
+	 				// // context.scale(0.5, 0.5);
+
+	 				//arc line
+	 				
+	 				console.log(context);
+	 				context.strokeStyle = "#00f";
+	 				context.lineWidth = 10;
+	 				context.save();
+	 				context.beginPath();
+	 				context.scale(0.1, 1);
+	 				context.moveTo(20, 20);
+	 				context.lineTo(200, 200);
+	 				context.stroke();
+
+	 				context.restore();
+
+	 				//draw a circle
+	 				// context.strokeStyle = "#f00";
+	 				// context.lineWidth = 50;
+	 				// context.save();
+	 				context.beginPath();
+	 				context.scale(1, 0.5);
+	 				context.arc(400, 300, 100, 0, Math.PI * 2, false);
+	 				// context.fill();	
+	 				context.stroke();
+
+	 				//draw a circle
+	 				// context.fillStyle = "#000";
+	 				// context.fillRect(800, 800, 200, 200);
+	 				// context.scale(0.5, 0.5);
+	 				// context.scale(0.1, 0.5);
+
+	 			}
+	 		}
+ 		});
+ 	</script>
+</head>
+<body>
+	<canvas id="canvas" width="1000" height="1000"></canvas>
+</body>
+</html>
