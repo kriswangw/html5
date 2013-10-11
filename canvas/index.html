@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>canvas example</title>
+	<script type="text/javascript">
+ 		window.addEventListener("load", function(){
+ 			var canvas = document.getElementById("canvas");
+	 		if(canvas && canvas.getContext){
+	 			var context = canvas.getContext("2d");
+	 			if (context) {
+	 				context.fillStyle = "#00f";
+	 				context.strokeStyle = "#f00";
+	 				context.lineWidth = 4;
+	 				context.fillRect(0, 0, 300, 100);
+	 				context.strokeRect(5, 110, 300, 100);
+	 				context.clearRect(50, 50, 50, 100);
+	 			}
+	 		}
+ 		});
+ 	</script>
+</head>
+<body>
+	<canvas id="canvas" width="310" height="1000"></canvas>
+</body>
+</html>

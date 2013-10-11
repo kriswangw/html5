@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>2dContextObject example</title>
+	<script type="text/javascript">
+		var Offset = 0;
+ 		window.addEventListener("load", function(){
+ 			dodashes();
+ 		});
+
+ 		function draw(){
+ 			var canvas = document.getElementById("canvas");
+	 		if(canvas && canvas.getContext){
+	 			var context = canvas.getContext("2d");
+	 			if (context) {
+	 				context.clearRect(0, 0, canvas.width, canvas.height);
+	 				var dashList = [5, 5, 10, 5];
+	 				context.strokeStyle = "#000";
+	 				context.lineWidth = 5;
+	 				console.log("context.lineJoin:", context.lineJoin);
+	 				context.lineJoin = "round";
+	 				// context.lineJoin = "square";
+	 				context.lineDashOffset = Offset;
+	 				context.setLineDash(dashList);
+	 				context.strokeRect(100, 100, 400, 400);
+	 			}
+	 		}
+ 		}
+
+ 		function dodashes() {
+	        Offset++;
+	        if (Offset > 20)  
+	        {
+	          Offset = 0;
+	        }
+	        draw();
+	        setTimeout(dodashes, 30);  
+	    }
+ 	</script>
+</head>
+<body>
+	<canvas id="canvas" width="1000" height="1000"></canvas>
+</body>
+</html>

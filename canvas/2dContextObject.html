@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>2dContextObject example</title>
+	<script type="text/javascript">
+ 		window.addEventListener("load", function(){
+ 			var canvas = document.getElementById("canvas");
+	 		if(canvas && canvas.getContext){
+	 			var context = canvas.getContext("2d");
+	 			if (context) {
+	 				console.log("context object:", context);
+	 				console.log("context.lineWidth:", context.lineWidth);
+	 				console.log("context.lineCap:", context.lineCap);
+	 				context.strokeStyle = "#000";
+	 				context.lineWidth = 20;
+	 				// context.lineCap = "round";
+	 				context.beginPath();
+	 				context.moveTo(20, 20);
+	 				// context.moveTo(0, 0);
+	 				context.lineTo(200, 200);
+	 				context.stroke();
+	 				context.closePath();
+
+	 				context.lineCap = "square";
+	 				context.strokeStyle = "#00f";
+	 				context.lineWidth = 10;
+	 				context.beginPath();
+	 				context.moveTo(20, 20);
+	 				context.lineTo(200, 200);
+	 				context.stroke();
+	 				context.closePath();
+	 			}
+	 		}
+ 		});
+ 	</script>
+</head>
+<body>
+	<canvas id="canvas" width="1000" height="1000"></canvas>
+</body>
+</html>
