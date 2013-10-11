@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>2dContextObject example</title>
+	<script type="text/javascript">
+ 		window.addEventListener("load", function(){
+ 			var canvas = document.getElementById("canvas");
+	 		if(canvas && canvas.getContext){
+	 			var context = canvas.getContext("2d");
+	 			if (context) {
+	 				context.strokeStyle = "#f00";
+	 				context.lineWidth = 3;
+	 				context.beginPath();
+	 				context.moveTo(10, 10);
+	 				context.lineTo(40, 40);
+	 				context.lineTo(140, 40);
+	 				// context.stroke();
+	 				context.lineTo(170, 150);
+	 				//back to original coordinate, then closepath doesn't draw a line
+	 				// context.moveTo(0, 0);
+	 				context.closePath();
+	 				context.stroke();
+
+	 				context.beginPath();
+	 				context.strokeStyle = '#000';
+	 				context.moveTo(20, 20);
+	 				context.lineTo(40, 40);
+	 				context.lineTo(60, 100);
+	 				context.stroke();
+
+	 				// context.lineTo(200, 198);
+	 				// context.stroke();
+	 			}
+	 		}
+ 		});
+ 	</script>
+</head>
+<body>
+	<canvas id="canvas" width="1000" height="1000"></canvas>
+</body>
+</html>
