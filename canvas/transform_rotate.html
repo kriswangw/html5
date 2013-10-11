@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>PathObject example</title>
+	<script type="text/javascript">
+ 		window.addEventListener("load", function(){
+ 			var canvas = document.getElementById("canvas");
+	 		if(canvas && canvas.getContext){
+	 			var context = canvas.getContext("2d");
+	 			if (context) {
+	 				console.log(context);
+	 				context.strokeStyle = "#00f";
+	 				context.lineWidth = 10;
+	 				context.save();
+	 				context.beginPath();
+	 				context.translate(100, 0);
+	 				context.rotate(Math.PI / 2);
+	 				context.moveTo(200, 20);
+	 				context.lineTo(400, 20);
+	 				context.stroke();
+
+	 				context.restore();
+
+	 				context.rotate(Math.PI / 2);
+	 				context.beginPath();
+	 				context.arc(300, 10, 100, 0, Math.PI * 2, false);
+	 				context.stroke();
+	 			}
+	 		}
+ 		});
+ 	</script>
+</head>
+<body>
+	<canvas id="canvas" width="1000" height="1000"></canvas>
+</body>
+</html>
