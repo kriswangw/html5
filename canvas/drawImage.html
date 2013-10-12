@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>isPointInPath example</title>
+	<script type="text/javascript">
+ 		window.addEventListener("load", function(){
+ 			var canvas = document.getElementById("canvas");
+	 		if(canvas && canvas.getContext){
+	 			var context = canvas.getContext("2d");
+	 			if (context) {
+	 				console.log(context);
+ 					var img = document.getElementById("img");
+ 					if(img){
+ 						console.log(img);
+ 						context.save();
+ 						context.scale(0.25, 0.25);
+ 						context.drawImage(img, 400, 400);
+
+ 						context.restore();
+ 						context.translate(68, 40);
+ 						context.fillStyle = "#00f";
+ 						context.fillRect(100, 100, 10, 10);
+ 						context.fillRect(100, 110, 10, 10);
+ 						context.fillStyle = "#000";
+ 						context.fillRect(110, 100, 10, 10);
+
+ 					}
+	 			}
+	 		}
+ 		});
+ 	</script>
+</head>
+<body>
+	<canvas id="canvas" width="1000" height="1000"></canvas>
+	<img id = "img" src="images/psb.jpg" style="display:none"/>
+</body>
+</html>
