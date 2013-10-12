@@ -13,8 +13,18 @@
 	 				context.fillStyle = "#00f";
 	 				context.strokeStyle = "#00f";
 	 				context.font = "20px Georgia";
-	 				context.strokeText("hello world!", 20, 20);
+	 				//相对于起始点
+	 				context.textAlign = "start";	// "start", "end", "left", "right", "center" (default: "start")
+	 				context.moveTo(0, 40);
+	 				context.lineTo(500, 40);
+	 				context.moveTo(0, 20);
+	 				context.lineTo(500, 20);
+	 				context.stroke();
+	 				context.textBaseline = "top";	// top, hanging, middle, alphabetic, ideographic, or bottom, (default : "alphabetic")
+	 				context.strokeText("hello world!", 0, 20);
 	 				context.fillText("hello world!", 40, 40);
+	 				console.log(context.measureText("hello world!"));
+
 	 			}
 	 		}
  		});
