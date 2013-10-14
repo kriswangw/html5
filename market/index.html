@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>canvas market example</title>
+	<script type="text/javascript" src="js/Namespace.js"></script>
+	<script type="text/javascript" src="js/main/Main.js"></script>
+	<script type="text/javascript" src="js/data/MinData.js"></script>
+</head>
+<body>
+	<canvas id="canvas" width="310" height="1000"></canvas>
+	<script type="text/javascript">
+		var options = {
+			global : {
+				baseTextColor : "#000",
+				upTextColor : "red",
+				downTextColor : "green",
+				font : "12px 宋体"
+			},
+			topText : {
+				fillWidth : 1,
+				region : [57, 10, 310, 200]
+			}
+		};
+		var data = new $NS.data.MinData();
+		var main = new $NS.main.Main("canvas", options, data.getData());
+		main.draw();
+	</script>
+</body>
+</html>
