@@ -69,6 +69,8 @@ $NS.main.Main.prototype = {
 	drawInner: function() {
 		this.drawCrrodLine();
 		this.drawPriceLine();
+		this.drawLeftText();
+		this.drawRightText();
 	},
 
 	drawCrrodLine: function() {
@@ -141,7 +143,86 @@ $NS.main.Main.prototype = {
 	},
 
 	drawLeftText: function() {
-		
+		var ctx = this.context;
+		ctx.save();
+		var region = this.options.inner.region;
+		var color = this.options.inner.color;
+		var data = this.data.mins;
+		var quote = this.data.quote;
+		var length = this.options.inner.length;
+		var maxDiff = 0, temp = 0;
+		var vUnit = this.options.vUnit;
+		var numberUtil = $NS.utils.NumberUtil;
+		var global = this.options.global;
+		data.forEach(function(item, index, array){ 
+			temp = Math.abs(item.price - quote.preClose);
+			if(temp > maxDiff){
+				maxDiff = temp;
+			}
+		});
+		var unit = Math.max(maxDiff * 2 / vUnit, 0.01);
+		var leftRegion = this.options.inner.leftText.region;
+		ctx.translate(leftRegion[0], leftRegion[1]);
+		ctx.textBaseline = this.options.inner.leftText.textBaseline;
+		ctx.font = this.options.inner.leftText.font;
+		for(i = 0;i < vUnit + 1;i++){
+			if(i < vUnit / 2){
+				// array.push(numberUtil.toMoney(quote.preClose + (vUnit / 2 - i) * unit));
+				ctx.fillStyle = global.upTextColor; 
+				ctx.fillText(numberUtil.toMoney(quote.preClose + (vUnit / 2 - i) * unit), 0, i * region[3] / vUnit);
+			}else if(i > vUnit / 2){
+				// array.push(numberUtil.toMoney(quote.preClose - (i - vUnit / 2) * unit));
+				ctx.fillStyle = global.downTextColor; 
+				ctx.fillText(numberUtil.toMoney(quote.preClose - (i - vUnit / 2) * unit), 0, i * region[3] / vUnit);
+			}else{
+				// array.push(numberUtil.toMoney(quote.preClose));
+				ctx.fillStyle = global.baseTextColor; 
+				ctx.fillText(numberUtil.toMoney(quote.preClose), 0, i * region[3] / vUnit);
+			}
+		}
+		ctx.restore();
+	},
+
+	drawRightText: function() {
+		var ctx = this.context;
+		ctx.save();
+		var region = this.options.inner.region;
+		var color = this.options.inner.color;
+		var data = this.data.mins;
+		var quote = this.data.quote;
+		var length = this.options.inner.length;
+		var maxDiff = 0, temp = 0;
+		var vUnit = this.options.vUnit;
+		var numberUtil = $NS.utils.NumberUtil;
+		var global = this.options.global;
+		data.forEach(function(item, index, array){
+			temp = Math.abs(item.price - quote.preClose);
+			if(temp > maxDiff){
+				maxDiff = temp;
+			}
+		});
+		var unit = Math.max(maxDiff * 2 / vUnit, 0.01);
+		var rightRegion = this.options.inner.rightText.region;
+		ctx.translate(rightRegion[0], rightRegion[1]);
+		ctx.textBaseline = this.options.inner.rightText.textBaseline;
+		ctx.font = this.options.inner.rightText.font;
+		for(i = 0;i < vUnit + 1;i++){
+			if(i < vUnit / 2){
+				// array.push(numberUtil.toMoney(quote.preClose + (vUnit / 2 - i) * unit));
+				ctx.fillStyle = global.upTextColor; 
+				ctx.fillText(numberUtil.toMoney((vUnit / 2 - i) * unit * 100 / quote.preClose) + "%", 0, i * region[3] / vUnit);
+			}else if(i > vUnit / 2){
+				// array.push(numberUtil.toMoney(quote.preClose - (i - vUnit / 2) * unit));
+				ctx.fillStyle = global.downTextColor; 
+				ctx.fillText(numberUtil.toMoney((0 - (i - vUnit / 2)) * unit * 100 / quote.preClose) + "%", 0, i * region[3] / vUnit);
+			}else{
+				// array.push(numberUtil.toMoney(quote.preClose));
+				ctx.fillStyle = global.baseTextColor; 
+				ctx.fillText("0.00%", 0, i * region[3] / vUnit);
+			}
+		}
+		ctx.restore();
 	}
+
 
 };
