@@ -5,6 +5,7 @@
 	<title>canvas market example</title>
 	<script type="text/javascript" src="js/Namespace.js"></script>
 	<script type="text/javascript" src="js/utils/NumberUtil.js"></script>
+	<script type="text/javascript" src="js/utils/CanvasUtil.js"></script>
 	<script type="text/javascript" src="js/main/Main.js"></script>
 	<script type="text/javascript" src="js/data/MinData.js"></script>
 </head>
@@ -20,13 +21,13 @@
 				borderColor : "gray"
 			},
 			topText : {
-				region : [57, 7, 310, 20]
+				region : [57, 7, 300, 20]
 			},
 			hUnit : ["09:30", "10:30", "11:30/13:00", "14:00", "15:00"],
 			vUnit : 8,
 			unitLine : "lightgray",
 			inner : {
-				region : [57.5, 20.5, 310, 200],
+				region : [57.5, 20.5, 300, 200],
 				color : "blue",
 				length : 241,
 				leftText : {
@@ -35,7 +36,25 @@
 					textBaseline : "middle"
 				},
 				rightText : {
-					region : [372.5, 20,5, 50, 200],
+					region : [362.5, 20,5, 50, 200],
+					font : "12px Arial",
+					textBaseline : "middle"
+				},
+				bottomText : {
+					region : [57.5, 220.5, 300, 20],
+					font : "12px Arial",
+					textBaseline : "top"
+				}
+			},
+			volume : {
+				region : [57.5, 240.5, 300, 60],
+				dash : [2, 2, 2, 2],
+				spaceColor : "#fff",
+				width : 1,
+				hUnit : 5,
+				vUnit : 2,
+				leftText : {
+					region : [5.5, 240,5, 50, 60],
 					font : "12px Arial",
 					textBaseline : "middle"
 				}
@@ -46,6 +65,7 @@
 		var data = new $NS.data.MinData();
 		var main = new $NS.main.Main("canvas", options, data.getData());
 		main.draw();
+		// $NS.utils.CanvasUtil.drawHDashLine(document.getElementById("canvas").getContext("2d"), 5, 5, 200, 5, 2, 2);
 	</script>
 </body>
 </html>

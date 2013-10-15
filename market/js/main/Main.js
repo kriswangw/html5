@@ -25,6 +25,7 @@ $NS.main.Main.prototype = {
 		this.drawOuter();
 		this.drawTopText();
 		this.drawInner();
+		this.drawVolume();
 	},
 
 	drawTopText: function() {
@@ -71,6 +72,13 @@ $NS.main.Main.prototype = {
 		this.drawPriceLine();
 		this.drawLeftText();
 		this.drawRightText();
+		this.drawBottomText();
+	},
+
+	drawVolume: function() {
+		this.drawVolumeCrrodLine();
+		this.drawVolumeLine();
+		this.drawVolumeLeftText();
 	},
 
 	drawCrrodLine: function() {
@@ -81,26 +89,32 @@ $NS.main.Main.prototype = {
 		var hUnit = this.options.hUnit;
 		var vUnit = this.options.vUnit;
 		var region = this.options.inner.region;
+		var canvasUtil = $NS.utils.CanvasUtil;
 
 		ctx.translate(region[0], region[1]);
 		ctx.strokeStyle = global.borderColor;
 		ctx.strokeRect(0, 0, region[2], region[3]);
 		//水平线
 		for (i = 0; i < vUnit - 1; i++) {
-			ctx.beginPath();
-			ctx.moveTo(0, (region[3] / vUnit) * (i + 1));
-			ctx.strokeStyle = i == vUnit / 2 - 1 ? "red" : this.options.unitLine;
-			console.debug("region[2]:", region[2]);
-			console.debug("(region[3] / vUnit) * (i + 1):", (region[3] / vUnit) * (i + 1));
-			ctx.lineTo(region[2], (region[3] / vUnit) * (i + 1));
-			ctx.stroke();
+			// ctx.beginPath();
+			// ctx.moveTo(0, (region[3] / vUnit) * (i + 1));
+			// console.debug("region[2]:", region[2]);
+			// console.debug("(region[3] / vUnit) * (i + 1):", (region[3] / vUnit) * (i + 1));
+			// ctx.lineTo(region[2], (region[3] / vUnit) * (i + 1));
+			console.debug("drawHDashLine:", (region[3] / vUnit) * (i + 1));
+			console.debug(i);
+			canvasUtil.drawHDashLine(ctx, 5, (region[3] / vUnit) * (i + 1), region[2], (region[3] / vUnit) * (i + 1), 2, 2, i == vUnit / 2 - 1 ? "red" : this.options.unitLine);
+
+
+			// ctx.stroke();
 		}
 		//垂直线
 		for (i = 0; i < hUnit.length - 2; i++) {
-			ctx.beginPath();
-			ctx.moveTo(region[2] * (i + 1) / (hUnit.length - 1), 0);
-			ctx.lineTo(region[2] * (i + 1) / (hUnit.length - 1), region[3]);
-			ctx.stroke();
+			// ctx.beginPath();
+			// ctx.moveTo(region[2] * (i + 1) / (hUnit.length - 1), 0);
+			// ctx.lineTo(region[2] * (i + 1) / (hUnit.length - 1), region[3]);
+			canvasUtil.drawVDashLine(ctx, region[2] * (i + 1) / (hUnit.length - 1), 5, region[2] * (i + 1) / (hUnit.length - 1), region[3], 2, 2, this.options.unitLine);
+			// ctx.stroke();
 		}
 		ctx.restore();
 	},
@@ -208,17 +222,122 @@ $NS.main.Main.prototype = {
 		ctx.font = this.options.inner.rightText.font;
 		for(i = 0;i < vUnit + 1;i++){
 			if(i < vUnit / 2){
-				// array.push(numberUtil.toMoney(quote.preClose + (vUnit / 2 - i) * unit));
 				ctx.fillStyle = global.upTextColor; 
 				ctx.fillText(numberUtil.toMoney((vUnit / 2 - i) * unit * 100 / quote.preClose) + "%", 0, i * region[3] / vUnit);
 			}else if(i > vUnit / 2){
-				// array.push(numberUtil.toMoney(quote.preClose - (i - vUnit / 2) * unit));
 				ctx.fillStyle = global.downTextColor; 
 				ctx.fillText(numberUtil.toMoney((0 - (i - vUnit / 2)) * unit * 100 / quote.preClose) + "%", 0, i * region[3] / vUnit);
 			}else{
-				// array.push(numberUtil.toMoney(quote.preClose));
 				ctx.fillStyle = global.baseTextColor; 
 				ctx.fillText("0.00%", 0, i * region[3] / vUnit);
+			}
+		}
+		ctx.restore();
+	},
+
+	drawBottomText: function() {
+		var ctx = this.context;
+		ctx.save();
+		var region = this.options.inner.bottomText.region;
+		var text = this.options.hUnit;
+		ctx.font = this.options.inner.bottomText.font;
+		ctx.textBaseline = this.options.inner.bottomText.textBaseline;
+		ctx.translate(region[0], region[1] + 3);
+		console.debug(text.length);
+		for(i = 0;i < text.length;i++){
+			if(i == 0){
+				ctx.fillText(text[i], 0, 0);
+			}else if(i == text.length - 1){
+				console.debug(region[2] - ctx.measureText(text[i]).width);
+				ctx.fillText(text[i], region[2] - ctx.measureText(text[i]).width, 0);
+			}else{
+				ctx.fillText(text[i], i * region[2] / (text.length - 1) - ctx.measureText(text[i]).width / 2, 0);
+			}
+		}
+		ctx.restore();
+	},
+
+	drawVolumeLine: function() {
+		var ctx = this.context;
+		ctx.save();
+		var region = this.options.volume.region;
+		var global = this.options.global;
+		var data = this.data.mins;
+		var quote = this.data.quote;
+		var temp = 0;
+		var maxVol = 0;
+		var length = this.options.inner.length;
+		data.forEach(function(item, index, arr){
+			temp = item.volume;
+			if(temp > maxVol){
+				maxVol = temp;
+			}
+		});
+		ctx.translate(region[0], region[1] + region[3]);
+		// ctx.scale(0.5, 1);
+		var y = 0;
+		for(i = 0;i < length;i++){
+			// if(i % 2 == 0)continue;
+			y = data[i].volume * region[3] / maxVol;
+			ctx.fillStyle = data[i].price > quote.preClose ? global.upTextColor : global.downTextColor;
+			ctx.fillRect(region[2] * i / length, 0 - y, 1, y);
+		}
+		ctx.restore();
+	},
+
+	drawVolumeCrrodLine: function() {
+		var ctx = this.context;
+		ctx.save();
+		var region = this.options.volume.region;
+		var hUnit = this.options.volume.hUnit;
+		var vUnit = this.options.volume.vUnit;
+		var global = this.options.global;
+		var canvasUtil = $NS.utils.CanvasUtil;
+
+		// ctx.setLineDash([2, 2, 2, 2]);
+		ctx.translate(region[0], region[1]);
+		ctx.strokeStyle = global.borderColor;
+		ctx.strokeRect(0, 0, region[2], region[3]);
+		//水平线
+		for (i = 0; i < vUnit - 1; i++) {
+			canvasUtil.drawHDashLine(ctx, 5, (region[3] / vUnit) * (i + 1), region[2], (region[3] / vUnit) * (i + 1), 2, 2, this.options.unitLine);
+		}
+		//垂直线
+		for (i = 0; i < hUnit - 2; i++) {
+			canvasUtil.drawVDashLine(ctx, region[2] * (i + 1) / (hUnit - 1), 5, region[2] * (i + 1) / (hUnit - 1), region[3], 2, 2, this.options.unitLine);
+		}
+		ctx.restore();
+	},
+
+	drawVolumeLeftText: function() {
+		var ctx = this.context;
+		ctx.save();
+		var region = this.options.volume.leftText.region;
+		var hUnit = this.options.volume.hUnit;
+		var vUnit = this.options.volume.vUnit;
+		var global = this.options.global;
+		var data = this.data.mins;
+		var numberUtil = $NS.utils.NumberUtil;
+
+		// ctx.setLineDash([2, 2, 2, 2]);
+		ctx.translate(region[0], region[1] + 5);
+		ctx.font = this.options.volume.leftText.font;
+		ctx.textBaseline = this.options.volume.leftText.textBaseline;
+		var temp = 0;
+		var maxVol = 0;
+		data.forEach(function(item, index, arr){
+			temp = item.volume;
+			if(temp > maxVol){
+				maxVol = temp;
+			}
+		});
+		for(i = 0;i < vUnit + 1;i++){
+			if(i == vUnit){
+				// ctx.textBaseline = "bottom";
+				ctx.textAlign = "right";
+				ctx.fillText("(万)", ctx.measureText("0000.00").width, region[3] * i / vUnit);
+			}else{
+				ctx.fillText(numberUtil.toMoney(maxVol * (vUnit - i) / vUnit / 10000), 0, region[3] * i / vUnit);
 			}
 		}
 		ctx.restore();
