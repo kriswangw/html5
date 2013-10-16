@@ -59,8 +59,8 @@ $NS.main.Main.prototype = {
 	drawOuter: function() {
 		var ctx = this.context;
 		ctx.save();
-		console.log("this.canvas.width:", this.canvas.width);
-		console.log("this.canvas.height:", this.canvas.height);
+		console.log("this.canvas.width:", ctx.canvas.width);
+		console.log("this.canvas.height:", ctx.canvas.height);
 		this.context.strokeStyle = this.options.global.borderColor;
 		// this.context.strokeWidth = 
 		this.context.strokeRect(0, 0, this.canvas.width, this.canvas.height);
@@ -183,15 +183,15 @@ $NS.main.Main.prototype = {
 			if(i < vUnit / 2){
 				// array.push(numberUtil.toMoney(quote.preClose + (vUnit / 2 - i) * unit));
 				ctx.fillStyle = global.upTextColor; 
-				ctx.fillText(numberUtil.toMoney(quote.preClose + (vUnit / 2 - i) * unit), 0, i * region[3] / vUnit);
+				ctx.fillText(numberUtil.toMoney(quote.preClose + (vUnit / 2 - i) * unit), 0, i * region[3] / vUnit, 50);
 			}else if(i > vUnit / 2){
 				// array.push(numberUtil.toMoney(quote.preClose - (i - vUnit / 2) * unit));
 				ctx.fillStyle = global.downTextColor; 
-				ctx.fillText(numberUtil.toMoney(quote.preClose - (i - vUnit / 2) * unit), 0, i * region[3] / vUnit);
+				ctx.fillText(numberUtil.toMoney(quote.preClose - (i - vUnit / 2) * unit), 0, i * region[3] / vUnit, 50);
 			}else{
 				// array.push(numberUtil.toMoney(quote.preClose));
 				ctx.fillStyle = global.baseTextColor; 
-				ctx.fillText(numberUtil.toMoney(quote.preClose), 0, i * region[3] / vUnit);
+				ctx.fillText(numberUtil.toMoney(quote.preClose), 0, i * region[3] / vUnit, 50);
 			}
 		}
 		ctx.restore();
@@ -223,13 +223,13 @@ $NS.main.Main.prototype = {
 		for(i = 0;i < vUnit + 1;i++){
 			if(i < vUnit / 2){
 				ctx.fillStyle = global.upTextColor; 
-				ctx.fillText(numberUtil.toMoney((vUnit / 2 - i) * unit * 100 / quote.preClose) + "%", 0, i * region[3] / vUnit);
+				ctx.fillText(numberUtil.toMoney((vUnit / 2 - i) * unit * 100 / quote.preClose) + "%", 0, i * region[3] / vUnit, 55);
 			}else if(i > vUnit / 2){
 				ctx.fillStyle = global.downTextColor; 
-				ctx.fillText(numberUtil.toMoney((0 - (i - vUnit / 2)) * unit * 100 / quote.preClose) + "%", 0, i * region[3] / vUnit);
+				ctx.fillText(numberUtil.toMoney((0 - (i - vUnit / 2)) * unit * 100 / quote.preClose) + "%", 0, i * region[3] / vUnit, 55);
 			}else{
 				ctx.fillStyle = global.baseTextColor; 
-				ctx.fillText("0.00%", 0, i * region[3] / vUnit);
+				ctx.fillText("0.00%", 0, i * region[3] / vUnit, 55);
 			}
 		}
 		ctx.restore();
