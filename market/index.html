@@ -4,6 +4,7 @@
 	<meta charset="UTF-8">
 	<title>canvas market example</title>
 	<script type="text/javascript" src="js/Namespace.js"></script>
+	<script type="text/javascript" src="js/quo.debug.js"></script>
 	<script type="text/javascript" src="js/utils/NumberUtil.js"></script>
 	<script type="text/javascript" src="js/utils/CanvasUtil.js"></script>
 	<script type="text/javascript" src="js/main/Main.js"></script>
@@ -64,7 +65,24 @@
 		// console.log($NS.utils.NumberUtil === $NS.utils.NumberUtil);
 		var data = new $NS.data.MinData();
 		var main = new $NS.main.Main("canvas", options, data.getData());
-		main.draw();
+		// main.draw();
+
+		setInterval(function(){
+			main.draw();
+			// console.log("test 123");
+		}, 40);
+
+		/*$$("#canvas").on("hold", function(event){
+			console.debug(arguments);
+			console.debug(event.originalEvent.offsetX, event.originalEvent.offsetY);
+
+		});*/
+		/*$$("#canvas").on("touchmove", function(){
+			console.debug("touchmove", arguments);
+		});*/
+		/*$$("#canvas").on("touchend", function(){
+			console.debug("touchend", arguments);
+		});*/
 		// $NS.utils.CanvasUtil.drawHDashLine(document.getElementById("canvas").getContext("2d"), 5, 5, 200, 5, 2, 2);
 	</script>
 </body>

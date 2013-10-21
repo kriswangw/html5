@@ -4,7 +4,7 @@ $NS.utils.CanvasUtil = (function() {
     return {
     	drawHDashLine : function(ctx, x1, y1, x2, y2, dashWidth, spaceWidth, color, lineWidth){
     		if(y1 != y2)return;
-    		ctx.save();
+    		// ctx.save();
     		ctx.strokeStyle = color || "#000";
     		ctx.lineWidth = lineWidth || 1;
     		/*
@@ -27,33 +27,48 @@ $NS.utils.CanvasUtil = (function() {
     			ctx.lineTo(x1 + length * i / n - spaceWidth, y1);
     		}*/
     		//TODO 神奇的问题，外层的i变量被改写
-    		for(j = 0;j < n;j++){
-    			ctx.moveTo(x1 + length * j / n, y1);
-    			ctx.lineTo(x1 + length * j / n - spaceWidth, y1);
+    		for(var i = 0;i < n;i++){
+    			ctx.moveTo(x1 + length * i / n, y1);
+    			ctx.lineTo(x1 + length * i / n - spaceWidth, y1);
     		}
     		
     		ctx.stroke();
-			ctx.restore();
+			// ctx.restore();
     		
     	},
 
     	drawVDashLine : function(ctx, x1, y1, x2, y2, dashWidth, spaceWidth, color, lineWidth){
     		if(x1 != x2)return;
-    		ctx.save();
+    		// ctx.save();
     		ctx.strokeStyle = color || "#000";
     		ctx.lineWidth = lineWidth || 1;
     		var length = Math.abs(y2 - y1);
     		var n = Math.ceil(length / (dashWidth + spaceWidth));
     		ctx.beginPath();
-    		for(j = 0;j < n;j++){
-    			ctx.moveTo(x1, y1 + length * j / n);
-    			ctx.lineTo(x1, y1 + length * j / n - spaceWidth);
+    		for(var i = 0;i < n;i++){
+    			ctx.moveTo(x1, y1 + length * i / n);
+    			ctx.lineTo(x1, y1 + length * i / n - spaceWidth);
     		}
     		
     		ctx.stroke();
-			ctx.restore();
+			// ctx.restore();
     		
-    	}
+    	},
+
+        debugArc : function(ctx, x, y){
+            ctx.beginPath();
+            ctx.fillStyle = "blue";
+            ctx.arc(x, y, 3, 0, Math.PI * 2, true);
+            ctx.fill();
+        },
+
+        fillArc : function(ctx, x, y, radius, color){
+            ctx.beginPath();
+            ctx.fillStyle = color;
+            ctx.arc(x, y, radius, 0, Math.PI * 2, true);
+            ctx.fill();
+        }
+
     }
 
 })()
