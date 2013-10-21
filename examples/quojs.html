@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>quojs</title>
+    <script type="text/javascript" src="quo.js" charset="utf-8"></script>
+</head>
+<body style="width:600px;height:600px;border:1px solid red">
+	<script type="text/javascript">
+		var env = $$.environment();
+		console.debug(env);
+		/*$$("body").on("tap", function(){
+			// console.
+			alert("one tap");
+		});*/
+
+		$$("body").on("singleTap", function(){
+			// console.
+			alert("singleTap tap");
+		});
+
+		$$("body").on("doubleTap", function(){
+			// console.
+			alert("doubleTap tap");
+		});
+
+		$$("body").on("hold", function(){
+			// console.
+			alert("hold");
+		});
+
+		$$("body").on("swipeLeft", function(){
+			// console.
+			alert("swipeLeft");
+		});
+
+		$$("body").on("swipeRight", function(){
+			// console.
+			alert("swipeRight");
+		});
+
+		$$("body").on("swipeDown", function(){
+			// console.
+			alert("swipeDown");
+		});
+
+		$$("body").on("swipeUp", function(){
+			// console.
+			alert("swipeUp");
+		});
+	</script>
+</body>
+</html>
