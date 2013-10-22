@@ -981,7 +981,7 @@ $NS.data.MinData = function() {
         ]
     };
 
-    this.getData = function(){
+    this.getData = function() {
         return data;
     }
 };
