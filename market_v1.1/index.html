@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>canvas market example v1.1</title>
+	<script type="text/javascript" src="js/kinetic-v4.7.2.min.js"></script>
+	<script type="text/javascript" src="js/zepto.min.js"></script>
+	<script type="text/javascript" src="js/modello.js"></script>
+	<script type="text/javascript" src="js/main/Bean.js"></script>
+	<script type="text/javascript" src="js/main/CanvasStage.js"></script>
+	<script type="text/javascript" src="js/main/ConfigMng.js"></script>
+	<script type="text/javascript" src="js/main/DataMng.js"></script>
+	<script type="text/javascript" src="js/main/EventMng.js"></script>
+	<script type="text/javascript" src="js/main/TimeLine.js"></script>
+	<script type="text/javascript" src="js/main/InnerFrame.js"></script>
+	<script type="text/javascript" src="js/main/TextCoord.js"></script>
+	<script type="text/javascript" src="js/main/VolumeTextCoord.js"></script>
+	<script type="text/javascript" src="js/main/TimeTextCoord.js"></script>
+	<script type="text/javascript" src="js/main/AbstractLine.js"></script>
+	<script type="text/javascript" src="js/main/PriceLine.js"></script>
+	<script type="text/javascript" src="js/main/AvgLine.js"></script>
+	<script type="text/javascript" src="js/main/VolumeLine.js"></script>
+	<script type="text/javascript" src="js/main/TopText.js"></script>
+
+
+</head>
+<body>
+	<!-- <div id="stock" style="margin:0 3px 0 3px;border:1px solid red"></div> -->
+	<script type="text/javascript">
+		var timeLine = Class.get('richeninfo.market.TimeLine').create('兴蓉投资', '000598');
+		// var TimeLine = Class.get('richeninfo.TimeLine');
+		// var timeLine = new TimeLine('sex1');
+		// console.debug(timeLine.toString(), timeLine);
+		timeLine.start();
+	</script>
+</body>
+</html>

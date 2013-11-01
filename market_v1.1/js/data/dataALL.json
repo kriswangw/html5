@@ -1,0 +1,24 @@
+{
+	"quote": {
+		"open": 6.09,
+		"preClose": 6.12,
+		"highest": 6.15,
+		"lowest": 6.00
+	},
+	"data": [{
+		"price": 6.09,
+		"volume": 494992,
+		"amount": 459279,
+		"time": "0930"
+	},{
+		"price": 6.10,
+		"volume": 494992,
+		"amount": 4592793,
+		"time": "0931"
+	},{
+		"price": 6.12,
+		"volume": 494992,
+		"amount": 4592793,
+		"time": "0932"
+	}]
+}

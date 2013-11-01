@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>canvas market example v1.1</title>
+	<script type="text/javascript" src="js/kinetic-v4.7.2.min.js"></script>
+	<script type="text/javascript" src="js/zepto.min.js"></script>
+	<script type="text/javascript" src="js/modello.js"></script>
+	<script type="text/javascript" src="js/main/Bean.js"></script>
+	<script type="text/javascript" src="js/main/CanvasStage.js"></script>
+	<script type="text/javascript" src="js/main/ConfigMng.js"></script>
+	<script type="text/javascript" src="js/main/DataMng.js"></script>
+	<script type="text/javascript" src="js/main/EventMng.js"></script>
+	<script type="text/javascript" src="js/main/TimeLine.js"></script>
+	<script type="text/javascript" src="js/main/InnerFrame.js"></script>
+	<script type="text/javascript" src="js/main/TextCoord.js"></script>
+
+
+</head>
+<body>
+	<div id="container"></div>
+	<!-- <div id="stock" style="margin:0 3px 0 3px;border:1px solid red"></div> -->
+	<script type="text/javascript">
+		// var timeLine = Class.get('richeninfo.market.TimeLine').create('兴蓉投资', '000598');
+		// var TimeLine = Class.get('richeninfo.TimeLine');
+		// var timeLine = new TimeLine('sex1');
+		// console.debug(timeLine.toString(), timeLine);
+		// timeLine.start();
+		var stage = new Kinetic.Stage({
+	        container: 'container',
+	        width: 578,
+	        height: 220
+	      });
+	      var layer = new Kinetic.Layer();
+
+	      var simpleText = new Kinetic.Text({
+	        x: stage.getWidth() / 2,
+	        y: 15,
+	        text: 'Simple Text',
+	        fontSize: 30,
+	        fontFamily: 'Calibri',
+	        fill: 'green'
+	      });
+	      simpleText.setOffset({
+        x: simpleText.getWidth() / 2
+      });
+	      layer.add(simpleText);
+      stage.add(layer);
+
+	</script>
+</body>
+</html>
