@@ -2,15 +2,23 @@
 <html>
 <head>
 	<meta charset="UTF-8">
+	<!-- <meta http-equiv="cache-control" content="no-cache" /> -->
 	<title>canvas market example</title>
 	<script type="text/javascript" src="js/Namespace.js"></script>
 	<script type="text/javascript" src="js/kinetic-v4.7.2.min.js"></script>
+	<script type="text/javascript" src="js/zepto.min.js"></script>
 	<script type="text/javascript" src="js/utils/NumberUtil.js"></script>
 	<script type="text/javascript" src="js/main/Main.js"></script>
-	<script type="text/javascript" src="js/data/MinData.js"></script>
+	<script type="text/javascript" src="js/main/DataFactory.js"></script>
+	<!-- // <script type="text/javascript" src="js/data/MinData.js"></script> -->
+	<script type="text/javascript" src="js/data/000001.js"></script>
+	<script type="text/javascript" src="js/data/000598.js"></script>
+
+
 </head>
 <body>
-	<div id="canvas"></div>
+	<!-- <div id="canvas" style="float:left"></div> -->
+	<div id="stock" style="margin-left: 5px"></div>
 	<script type="text/javascript">
 		var options = {
 			global : {
@@ -62,9 +70,15 @@
 				}
 			}
 		};
-		var data = new $NS.data.MinData();
-		var main = new $NS.main.Main("canvas", options, data.getData());
-		main.draw();
+		// var data = new $NS.data.MinData();
+		// var main = new $NS.main.Main("canvas", options, data.getData());
+		// main.draw();
+
+		// var stockData = new $NS.data.StockData();
+		
+
+		var dataFactory = new $NS.main.DataFactory("0005982");
+		dataFactory.requestData(options);
 	</script>
 </body>
 </html>
